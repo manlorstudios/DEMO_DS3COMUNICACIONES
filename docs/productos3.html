@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Catálogo completo de productos Cisco - Switches, Routers, Access Points y soluciones de networking." />
+  <meta name="keywords"
+    content="Cisco, productos, catálogo, switches, routers, access points, networking, precio" />
+  <meta name="author" content="ds3comunicaciones" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Personalizado -->
+  <style>
+    :root {
+      --primary-blue: #049FD9;
+      --cisco-blue: #005073;
+      --dark-blue: #003B5C;
+      --tech-gradient: linear-gradient(135deg, #049FD9 0%, #005073 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      overflow-x: hidden;
+    }
+
+    .tech-gradient {
+      background: var(--tech-gradient);
+    }
+    .product-card a {
+  display: inline-block; /* evita que el link estire la imagen */
+  text-decoration: none; /* quita subrayado */
+}
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border: 1px solid #f1f5f9;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--tech-gradient);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .category-filter {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+      height: fit-content;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .filter-group {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 1rem;
+    }
+
+    .filter-group:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+
+    .filter-title {
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .filter-title i {
+      transition: transform 0.3s ease;
+    }
+
+    .filter-title.collapsed i {
+      transform: rotate(-90deg);
+    }
+
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 200px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .filter-options.collapsed {
+      display: none;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+    }
+
+    .filter-option:hover {
+      background: #f3f4f6;
+    }
+
+    .filter-option input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #049FD9;
+    }
+
+    .filter-option label {
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #6b7280;
+      flex: 1;
+    }
+
+    .price-range {
+      width: 100%;
+      margin: 1rem 0;
+    }
+
+    .price-values {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .price-value {
+      flex: 1;
+      text-align: center;
+      padding: 0.5rem;
+      background: #f8fafc;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: #374151;
+      font-weight: 500;
+    }
+
+    .search-box {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #049FD9;
+      box-shadow: 0 0 0 3px rgba(4, 159, 217, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+    }
+
+    .sort-select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      background: white;
+      cursor: pointer;
+    }
+
+    .results-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .results-count {
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    .view-options {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .view-btn {
+      padding: 0.5rem;
+      border: 1px solid #e5e7eb;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .view-btn.active {
+      background: #049FD9;
+      color: white;
+      border-color: #049FD9;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 3rem;
+    }
+
+    .page-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid #e5e7eb;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .page-btn.active {
+      background: #049FD9;
+      color: white;
+      border-color: #049FD9;
+    }
+
+    .page-btn:hover:not(.active) {
+      background: #f3f4f6;
+    }
+
+    .quick-view-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      padding: 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .product-card:hover .quick-view-btn {
+      opacity: 1;
+    }
+
+    .stock-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: #10b981;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .out-of-stock {
+      background: #ef4444;
+    }
+
+    .compare-checkbox {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 20px;
+      height: 20px;
+      accent-color: #049FD9;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .product-card:hover .compare-checkbox {
+      opacity: 1;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow: auto;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #6b7280;
+      z-index: 1;
+    }
+
+    /* Mobile Filters */
+    .mobile-filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: #049FD9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .mobile-filters {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100vh;
+      background: white;
+      z-index: 1000;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .mobile-filters.active {
+      left: 0;
+    }
+
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #049FD9;
+    }
+
+    .filter-header h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .close-filters {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #6b7280;
+      cursor: pointer;
+    }
+
+    /* WhatsApp Flotante */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+
+    .whatsapp-float i {
+      color: white;
+      font-size: 28px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Scrollbar personalizado */
+    .filter-options::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .filter-options::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .filter-options::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 10px;
+    }
+
+    .filter-options::-webkit-scrollbar-thumb:hover {
+      background: #a1a1a1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
+      .sidebar-filters {
+        display: none;
+      }
+      
+      .results-info {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .view-options {
+        align-self: flex-end;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        margin: 1rem;
+        max-height: calc(100vh - 2rem);
+      }
+      
+      .products-grid {
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      
+      .mobile-filters {
+        padding: 0.75rem;
+      }
+      
+      .filter-group {
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+      }
+      
+      .filter-option {
+        padding: 0.375rem;
+      }
+      
+      .modal-content {
+        margin: 0.5rem;
+        max-height: calc(100vh - 1rem);
+      }
+      
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .whatsapp-float i {
+        font-size: 24px;
+      }
+    }
+
+    /* Layout */
+    .main-content {
+      display: flex;
+      gap: 2rem;
+      position: relative;
+    }
+
+    @media (max-width: 1024px) {
+      .main-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    /* Filter Overlay */
+    .filter-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+
+    .filter-overlay.active {
+      display: block;
+    }
+  </style>
+
+  <title>Catálogo de Productos - DS3 Comunicaciones</title>
+</head>
+
+<body class="bg-gray-50">
+  <!-- WhatsApp Flotante -->
+  <a href="https://wa.me/51994428965?text=Hola,%20me%20interesa%20información%20sobre%20sus%20productos%20Cisco" 
+     target="_blank" 
+     class="whatsapp-float"
+     aria-label="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between py-4">
+        <div class="flex items-center space-x-4">
+          <img src="http://www.ds3comunicaciones.com/mikrotik/images/Logo1.jpg" 
+               alt="DS3 Comunicaciones" 
+               class="h-12 w-auto">
+          <span class="text-xl font-bold text-gray-800 hidden md:block">DS3 Comunicaciones</span>
+        </div>
+
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition">Inicio</a>
+          <a href="productos3.html" class="text-blue-600 font-medium transition">Productos</a>
+          <a href="soluciones.html" class="text-gray-700 hover:text-blue-600 font-medium transition">Soluciones</a>
+          <a href="soporte.html" class="text-gray-700 hover:text-blue-600 font-medium transition">Soporte</a>
+          <a href="contacto.html" class="text-gray-700 hover:text-blue-600 font-medium transition">Contacto</a>
+        </nav>
+
+        <div class="flex items-center space-x-4">
+          <a href="https://wa.me/51994428965" 
+             target="_blank"
+             class="hidden md:flex items-center bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+            <i class="fab fa-whatsapp mr-2"></i>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <section class="bg-blue-50 py-4">
+    <div class="container mx-auto px-4">
+      <nav class="flex space-x-2 text-sm text-gray-600">
+        <a href="index.html" class="hover:text-blue-600">Inicio</a>
+        <span class="text-gray-400">/</span>
+        <span class="text-blue-600">Catálogo de Productos</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8">
+    <!-- Page Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Catálogo de Productos Cisco</h1>
+      <p class="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+        Descubre nuestra amplia gama de soluciones Cisco para networking empresarial. 
+        Encuentra el equipo perfecto para tus necesidades.
+      </p>
+    </div>
+
+    <div class="main-content">
+      <!-- Mobile Filter Button -->
+      <button class="mobile-filter-btn lg:hidden" onclick="toggleMobileFilters()">
+        <i class="fas fa-filter"></i>
+        Filtros y Ordenar
+        <span class="bg-white text-blue-600 rounded-full w-6 h-6 flex items-center justify-center text-sm ml-2" id="activeFiltersCount">0</span>
+      </button>
+
+      <!-- Sidebar Filters (Desktop) -->
+      <aside class="sidebar-filters w-80 hidden lg:block">
+        <div class="category-filter">
+          <div class="filter-header">
+            <h2>Filtros</h2>
+          </div>
+
+          <!-- Search -->
+          <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Buscar productos..." class="search-input" id="searchInput">
+          </div>
+
+          <!-- Categories -->
+          <div class="filter-group">
+            <div class="filter-title" onclick="toggleFilterGroup(this)">
+              <span>Categorías</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="filter-options">
+              <label class="filter-option">
+                <input type="checkbox" name="category" value="switch-catalyst" onchange="filterProducts()">
+                <span>Switch Catalyst</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="category" value="cisco-business" onchange="filterProducts()">
+                <span>Cisco Business</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="category" value="switch-industrial" onchange="filterProducts()">
+                <span>Switch Industrial</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="category" value="aironet" onchange="filterProducts()">
+                <span>Aironet</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="category" value="telefono" onchange="filterProducts()">
+                <span>Teléfono IP</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="category" value="meraki" onchange="filterProducts()">
+                <span>Meraki</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="category" value="transceiver" onchange="filterProducts()">
+                <span>Transceiver</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Price Range -->
+          <div class="filter-group">
+            <div class="filter-title" onclick="toggleFilterGroup(this)">
+              <span>Rango de Precio</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="filter-options">
+              <input type="range" min="0" max="10000" value="10000" class="price-range" id="priceRange" oninput="updatePriceValue(this.value)" onchange="filterProducts()">
+              <div class="price-values">
+                <span class="price-value">$0</span>
+                <span class="price-value" id="currentPriceValue">$5,000</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Availability -->
+          <div class="filter-group">
+            <div class="filter-title" onclick="toggleFilterGroup(this)">
+              <span>Disponibilidad</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="filter-options">
+              <label class="filter-option">
+                <input type="checkbox" name="availability" value="in-stock" checked onchange="filterProducts()">
+                <span>En stock</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="availability" value="out-of-stock" onchange="filterProducts()">
+                <span>Agotado</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Brands -->
+          <div class="filter-group">
+            <div class="filter-title" onclick="toggleFilterGroup(this)">
+              <span>Marcas</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="filter-options">
+              <label class="filter-option">
+                <input type="checkbox" name="brand" value="cisco" checked onchange="filterProducts()">
+                <span>Cisco</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="brand" value="ubiquiti" onchange="filterProducts()">
+                <span>Ubiquiti</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="brand" value="mikrotik" onchange="filterProducts()">
+                <span>MikroTik</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="brand" value="lenovo" onchange="filterProducts()">
+                <span>Lenovo</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Reset Filters -->
+          <button class="w-full bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition mt-4" 
+                  onclick="resetFilters()">
+            <i class="fas fa-times mr-2"></i>
+            Limpiar Filtros
+          </button>
+        </div>
+      </aside>
+
+      <!-- Products Section -->
+      <div class="products-section flex-1">
+        <!-- Toolbar -->
+        <div class="results-info">
+          <div class="flex items-center gap-4">
+            <span class="results-count" id="resultsCount">Mostrando 6 de 6 productos</span>
+          </div>
+          
+          <div class="flex items-center gap-4">
+            <select class="sort-select" onchange="sortProducts(this.value)">
+              <option value="name">Ordenar por: Nombre</option>
+              <option value="price-low">Precio: Menor a Mayor</option>
+              <option value="price-high">Precio: Mayor a Menor</option>
+              <option value="newest">Más Recientes</option>
+            </select>
+            
+            <div class="view-options">
+              <button class="view-btn active" onclick="changeView('grid')">
+                <i class="fas fa-th"></i>
+              </button>
+              <button class="view-btn" onclick="changeView('list')">
+                <i class="fas fa-list"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
+          <!-- Los productos se cargan aquí dinámicamente -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button class="page-btn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">4</button>
+          <button class="page-btn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Mobile Filters Panel -->
+  <div class="mobile-filters" id="mobileFilters">
+    <div class="filter-header">
+      <h2>Filtros</h2>
+      <button class="close-filters" onclick="toggleMobileFilters()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Search -->
+    <div class="search-box">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Buscar productos..." class="search-input" id="searchInputMobile">
+    </div>
+
+    <!-- Categories -->
+    <div class="filter-group">
+      <div class="filter-title" onclick="toggleFilterGroup(this)">
+        <span>Categorías</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="filter-options">
+        <label class="filter-option">
+          <input type="checkbox" name="category-mobile" value="switch-catalyst" onchange="filterProducts()">
+          <span>Switch Catalyst</span>
+        </label>
+        <label class="filter-option">
+          <input type="checkbox" name="category-mobile" value="cisco-business" onchange="filterProducts()">
+          <span>Cisco Business</span>
+        </label>
+        <label class="filter-option">
+          <input type="checkbox" name="category-mobile" value="switch-industrial" onchange="filterProducts()">
+          <span>Switch Industrial</span>
+        </label>
+        <label class="filter-option">
+          <input type="checkbox" name="category-mobile" value="aironet" onchange="filterProducts()">
+          <span>Aironet</span>
+        </label>
+        <label class="filter-option">
+          <input type="checkbox" name="category-mobile" value="telefono" onchange="filterProducts()">
+          <span>Teléfono IP</span>
+        </label>
+        <label class="filter-option">
+          <input type="checkbox" name="category-mobile" value="meraki" onchange="filterProducts()">
+          <span>Meraki</span>
+        </label>
+        <label class="filter-option">
+          <input type="checkbox" name="category-mobile" value="transceiver" onchange="filterProducts()">
+          <span>Transceiver</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Price Range -->
+    <div class="filter-group">
+      <div class="filter-title" onclick="toggleFilterGroup(this)">
+        <span>Rango de Precio</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="filter-options">
+        <input type="range" min="0" max="10000" value="10000" class="price-range" id="priceRangeMobile" oninput="updatePriceValueMobile(this.value)" onchange="filterProducts()">
+        <div class="price-values">
+          <span class="price-value">$0</span>
+          <span class="price-value" id="currentPriceValueMobile">$10,000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Availability -->
+    <div class="filter-group">
+      <div class="filter-title" onclick="toggleFilterGroup(this)">
+        <span>Disponibilidad</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="filter-options">
+        <label class="filter-option">
+          <input type="checkbox" name="availability-mobile" value="in-stock" checked onchange="filterProducts()">
+          <span>En stock</span>
+        </label>
+        <label class="filter-option">
+          <input type="checkbox" name="availability-mobile" value="out-of-stock" onchange="filterProducts()">
+          <span>Agotado</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Brands -->
+    <div class="filter-group">
+      <div class="filter-title" onclick="toggleFilterGroup(this)">
+        <span>Marcas</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="filter-options">
+        <label class="filter-option">
+          <input type="checkbox" name="brand-mobile" value="cisco" checked onchange="filterProducts()">
+          <span>Cisco</span>
+        </label>
+        <label class="filter-option">
+          <input type="checkbox" name="brand-mobile" value="ubiquiti" onchange="filterProducts()">
+          <span>Ubiquiti</span>
+        </label>
+        <label class="filter-option">
+          <input type="checkbox" name="brand-mobile" value="mikrotik" onchange="filterProducts()">
+          <span>MikroTik</span>
+        </label>
+        <label class="filter-option">
+          <input type="checkbox" name="brand-mobile" value="lenovo" onchange="filterProducts()">
+          <span>Lenovo</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Reset Filters -->
+    <button class="w-full bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition mt-4" 
+            onclick="resetFilters()">
+      <i class="fas fa-times mr-2"></i>
+      Limpiar Filtros
+    </button>
+  </div>
+
+  <!-- Mobile Filters Overlay -->
+  <div class="filter-overlay" id="filterOverlay" onclick="toggleMobileFilters()"></div>
+
+  <!-- Quick View Modal -->
+  <div class="modal" id="quickViewModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeQuickView()">&times;</button>
+      <div class="p-4 md:p-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+          <div>
+            <img src="https://web.netperu100.com/cisco/catalyst/images/C9200L-24T-4G-E_front.jpg" 
+                 alt="Product Image" class="w-full rounded-lg">
+          </div>
+          <div>
+            <h2 class="text-xl md:text-2xl font-bold mb-4">Switch Catalyst 9200L</h2>
+            <p class="text-gray-600 mb-4 text-sm md:text-base">C9200L-24T-4G-E - Switch capa L3 con 24 puertos Gigabit y 4 puertos SFP</p>
+            
+            <div class="mb-6">
+              <span class="text-2xl md:text-3xl font-bold text-blue-600">$1,195</span>
+              <span class="ml-2 text-green-600 font-semibold">En stock</span>
+            </div>
+
+            <div class="space-y-3 mb-6 text-sm md:text-base">
+              <div class="flex justify-between">
+                <span class="text-gray-600">Categoría:</span>
+                <span class="font-semibold">Switch Catalyst</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Puertos:</span>
+                <span class="font-semibold">24 Gigabit + 4 SFP</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Capa:</span>
+                <span class="font-semibold">L3 Completa</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Stacking:</span>
+                <span class="font-semibold">Hasta 8 equipos</span>
+              </div>
+            </div>
+
+            <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition mb-4">
+              <i class="fas fa-shopping-cart mr-2"></i>
+              Agregar al Carrito
+            </button>
+            
+            <button class="w-full border border-blue-600 text-blue-600 py-3 rounded-lg hover:bg-blue-50 transition">
+              <i class="fas fa-file-alt mr-2"></i>
+              Ver Especificaciones
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <img src="http://www.ds3comunicaciones.com/mikrotik/images/Logo1.jpg" 
+               alt="DS3 Comunicaciones" class="h-12 mb-4">
+          <p class="text-gray-400">Líder en soluciones de networking y comunicaciones.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-4">Productos</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white">Switch Catalyst</a></li>
+            <li><a href="#" class="hover:text-white">Access Points</a></li>
+            <li><a href="#" class="hover:text-white">Routers</a></li>
+            <li><a href="#" class="hover:text-white">Firewalls</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-4">Soporte</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white">Documentación</a></li>
+            <li><a href="#" class="hover:text-white">Garantías</a></li>
+            <li><a href="#" class="hover:text-white">Contacto Técnico</a></li>
+            <li><a href="#" class="hover:text-white">Preguntas Frecuentes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-4">Contacto</h3>
+          <div class="space-y-2 text-gray-400">
+            <p><i class="fas fa-phone mr-2"></i> +51 994 428 965</p>
+            <p><i class="fas fa-envelope mr-2"></i> netperu100@hotmail.com</p>
+            <p><i class="fas fa-clock mr-2"></i> Lun-Vie: 9:00 - 18:00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Datos de productos de ejemplo
+    const products = [
+      {
+        id: 1,
+        name: "Switch Catalyst 9200L",
+        description: "24 puertos Gigabit + 4 puertos SFP",
+        price: 1195,
+        category: "switch-catalyst",
+        brand: "cisco",
+        stock: "in-stock",
+        image: "https://web.netperu100.com/cisco/catalyst/images/C9200L-24P-4G-E_front.jpg",
+        link: "item7.html"
+      },
+      {
+        id: 2,
+        name: "Access Point Aironet",
+        description: "WiFi 6 para entornos empresariales exigentes",
+        price: 899,
+        category: "aironet",
+        brand: "cisco",
+        stock: "in-stock",
+        image: "https://web.netperu100.com/cisco/catalyst/images/C9200L-24T-4G-E_front.jpg"
+      },
+      {
+        id: 3,
+        name: "Router Industrial",
+        description: "Diseñado para entornos exigentes y adversos",
+        price: 1450,
+        category: "switch-industrial",
+        brand: "cisco",
+        stock: "in-stock",
+        image: "https://web.netperu100.com/cisco/catalyst/images/C9200L-48T-4G-E_front.jpg"
+      },
+      {
+        id: 4,
+        name: "Switch Business",
+        description: "Ideal para pequeñas y medianas empresas",
+        price: 750,
+        category: "cisco-business",
+        brand: "cisco",
+        stock: "in-stock",
+        image: "https://web.netperu100.com/cisco/catalyst/images/C9200L-48P-4G-E_front.jpg"
+      },
+      {
+        id: 5,
+        name: "Firewall Meraki",
+        description: "Protección avanzada en la nube",
+        price: 2200,
+        category: "meraki",
+        brand: "cisco",
+        stock: "out-of-stock",
+        image: "https://web.netperu100.com/cisco/catalyst/images/C9200L-24T-4X-E_front.jpg"
+      },
+      {
+        id: 6,
+        name: "Transceiver SFP+",
+        description: "10GBase-SR para conexiones de fibra",
+        price: 150,
+        category: "transceiver",
+        brand: "cisco",
+        stock: "in-stock",
+        image: "https://web.netperu100.com/cisco/catalyst/images/C9200L-48P-4X-E_front.jpg"
+      }
+    ];
+
+    // Inicializar la página
+    document.addEventListener('DOMContentLoaded', function() {
+      renderProducts(products);
+      updateActiveFiltersCount();
+      
+      // Sincronizar los filtros móviles con los de desktop
+      syncFilters();
+    });
+
+    // Renderizar productos
+    function renderProducts(productsToRender) {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+
+      if (productsToRender.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-12">
+            <i class="fas fa-search text-4xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-600 mb-2">No se encontraron productos</h3>
+            <p class="text-gray-500">Intenta ajustar los filtros de búsqueda</p>
+          </div>
+        `;
+        return;
+      }
+
+      productsToRender.forEach(product => {
+        const productCard = createProductCard(product);
+        grid.appendChild(productCard);
+      });
+
+      document.getElementById('resultsCount').textContent = 
+        `Mostrando ${productsToRender.length} de ${products.length} productos`;
+    }
+
+    // Crear tarjeta de producto
+    function createProductCard(product) {
+      const div = document.createElement('div');
+      div.className = 'product-card';
+      div.setAttribute('data-category', product.category);
+      div.setAttribute('data-price', product.price);
+      div.setAttribute('data-stock', product.stock);
+      div.setAttribute('data-brand', product.brand);
+
+      div.innerHTML = `
+        <input type="checkbox" class="compare-checkbox" onchange="toggleCompare(this)">
+        <div class="stock-badge ${product.stock === 'out-of-stock' ? 'out-of-stock' : ''}">
+          ${product.stock === 'in-stock' ? 'En stock' : 'Agotado'}
+        </div>
+        <button class="quick-view-btn" onclick="openQuickView(${product.id})">
+          <i class="fas fa-eye"></i>
+        </button>
+        
+        <div class="p-4 md:p-6">
+          
+          <div class="h-40 md:h-48 flex items-center justify-center mb-4">
+            <a href= "${product.link}">
+            <img src="${product.image}" 
+                 alt="${product.name}" 
+                 class="max-h-full max-w-full object-contain">
+                 
+              </a>
+          </div>
+          
+          <h3 class="text-base md:text-lg font-bold text-gray-800 mb-2">${product.name}</h3>
+          <p class="text-gray-600 text-sm mb-4">${product.description}</p>
+          
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xl md:text-2xl font-bold text-blue-600">$${product.price.toLocaleString()}</span>
+            <span class="text-xs md:text-sm text-gray-500">${getCategoryLabel(product.category)}</span>
+          </div>
+          
+          <button class="w-full ${product.stock === 'in-stock' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'} text-white py-2 rounded-lg transition text-sm md:text-base" 
+                  ${product.stock === 'out-of-stock' ? 'disabled' : ''}>
+            <i class="fas ${product.stock === 'in-stock' ? 'fa-shopping-cart' : 'fa-clock'} mr-2"></i>
+            ${product.stock === 'in-stock' ? 'Agregar al Carrito' : 'Próximamente'}
+          </button>
+        </div>
+      `;
+
+      return div;
+    }
+
+    // Obtener etiqueta de categoría
+    function getCategoryLabel(category) {
+      const labels = {
+        'switch-catalyst': 'Capa L3',
+        'cisco-business': '24 Puertos',
+        'switch-industrial': 'Rugged',
+        'aironet': 'WiFi 6',
+        'meraki': 'Cloud',
+        'transceiver': '10G'
+      };
+      return labels[category] || 'Cisco';
+    }
+
+    // Filtrar productos
+    function filterProducts() {
+      const selectedCategories = getSelectedValues('category') || getSelectedValues('category-mobile');
+      const selectedBrands = getSelectedValues('brand') || getSelectedValues('brand-mobile');
+      const selectedAvailability = getSelectedValues('availability') || getSelectedValues('availability-mobile');
+      
+      // Usar el valor del rango de precio del dispositivo actual
+      const maxPrice = document.getElementById('priceRange') ? 
+        parseInt(document.getElementById('priceRange').value) : 
+        parseInt(document.getElementById('priceRangeMobile').value);
+      
+      const searchTerm = document.getElementById('searchInput') ? 
+        document.getElementById('searchInput').value.toLowerCase() : 
+        document.getElementById('searchInputMobile').value.toLowerCase();
+
+      const filteredProducts = products.filter(product => {
+        const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category);
+        const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
+        const matchesAvailability = selectedAvailability.length === 0 || selectedAvailability.includes(product.stock);
+        const matchesPrice = product.price <= maxPrice;
+        const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
+                             product.description.toLowerCase().includes(searchTerm);
+
+        return matchesCategory && matchesBrand && matchesAvailability && matchesPrice && matchesSearch;
+      });
+
+      renderProducts(filteredProducts);
+      updateActiveFiltersCount();
+      syncFilters(); // Sincronizar filtros entre dispositivos
+    }
+
+    // Obtener valores seleccionados de checkboxes
+    function getSelectedValues(name) {
+      const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+      return Array.from(checkboxes).map(cb => cb.value);
+    }
+
+    // Actualizar contador de filtros activos
+    function updateActiveFiltersCount() {
+      const activeFilters = document.querySelectorAll('input[type="checkbox"]:checked').length;
+      const priceRange = document.getElementById('priceRange') || document.getElementById('priceRangeMobile');
+      const hasPriceFilter = priceRange && priceRange.value < priceRange.max;
+      
+      const count = activeFilters + (hasPriceFilter ? 1 : 0);
+      document.getElementById('activeFiltersCount').textContent = count;
+    }
+
+    // Actualizar valor del precio (desktop)
+    function updatePriceValue(value) {
+      document.getElementById('currentPriceValue').textContent = `$${parseInt(value).toLocaleString()}`;
+    }
+
+    // Actualizar valor del precio (móvil)
+    function updatePriceValueMobile(value) {
+      document.getElementById('currentPriceValueMobile').textContent = `$${parseInt(value).toLocaleString()}`;
+    }
+
+    // Alternar grupo de filtros
+    function toggleFilterGroup(element) {
+      element.classList.toggle('collapsed');
+      const options = element.nextElementSibling;
+      options.classList.toggle('collapsed');
+    }
+
+    // Alternar filtros móviles
+    function toggleMobileFilters() {
+      const filters = document.getElementById('mobileFilters');
+      const overlay = document.getElementById('filterOverlay');
+      
+      filters.classList.toggle('active');
+      overlay.classList.toggle('active');
+      
+      // Prevenir scroll del body cuando los filtros están abiertos
+      document.body.style.overflow = filters.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // Sincronizar filtros entre desktop y móvil
+    function syncFilters() {
+      // Sincronizar categorías
+      const desktopCategories = document.querySelectorAll('input[name="category"]');
+      const mobileCategories = document.querySelectorAll('input[name="category-mobile"]');
+      
+      desktopCategories.forEach((checkbox, index) => {
+        if (index < mobileCategories.length) {
+          mobileCategories[index].checked = checkbox.checked;
+        }
+      });
+
+      // Sincronizar marcas
+      const desktopBrands = document.querySelectorAll('input[name="brand"]');
+      const mobileBrands = document.querySelectorAll('input[name="brand-mobile"]');
+      
+      desktopBrands.forEach((checkbox, index) => {
+        if (index < mobileBrands.length) {
+          mobileBrands[index].checked = checkbox.checked;
+        }
+      });
+
+      // Sincronizar disponibilidad
+      const desktopAvailability = document.querySelectorAll('input[name="availability"]');
+      const mobileAvailability = document.querySelectorAll('input[name="availability-mobile"]');
+      
+      desktopAvailability.forEach((checkbox, index) => {
+        if (index < mobileAvailability.length) {
+          mobileAvailability[index].checked = checkbox.checked;
+        }
+      });
+
+      // Sincronizar rango de precio
+      const desktopPrice = document.getElementById('priceRange');
+      const mobilePrice = document.getElementById('priceRangeMobile');
+      if (desktopPrice && mobilePrice) {
+        mobilePrice.value = desktopPrice.value;
+        updatePriceValueMobile(desktopPrice.value);
+      }
+
+      // Sincronizar búsqueda
+      const desktopSearch = document.getElementById('searchInput');
+      const mobileSearch = document.getElementById('searchInputMobile');
+      if (desktopSearch && mobileSearch) {
+        mobileSearch.value = desktopSearch.value;
+      }
+    }
+
+    // Resetear filtros
+    function resetFilters() {
+      // Resetear filtros desktop
+      document.querySelectorAll('input[name="category"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+      document.querySelectorAll('input[name="brand"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+      document.querySelectorAll('input[name="availability"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+      
+      // Resetear filtros móvil
+      document.querySelectorAll('input[name="category-mobile"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+      document.querySelectorAll('input[name="brand-mobile"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+      document.querySelectorAll('input[name="availability-mobile"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+
+      // Resetear precio
+      const desktopPrice = document.getElementById('priceRange');
+      const mobilePrice = document.getElementById('priceRangeMobile');
+      if (desktopPrice) desktopPrice.value = 10000;
+      if (mobilePrice) mobilePrice.value = 10000;
+      
+      // Resetear búsqueda
+      const desktopSearch = document.getElementById('searchInput');
+      const mobileSearch = document.getElementById('searchInputMobile');
+      if (desktopSearch) desktopSearch.value = '';
+      if (mobileSearch) mobileSearch.value = '';
+
+      updatePriceValue(10000);
+      updatePriceValueMobile(10000);
+      filterProducts();
+    }
+
+    // Cambiar vista
+    function changeView(viewType) {
+      const grid = document.getElementById('productsGrid');
+      const buttons = document.querySelectorAll('.view-btn');
+      
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      if (viewType === 'list') {
+        grid.classList.remove('grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3');
+        grid.classList.add('grid-cols-1');
+      } else {
+        grid.classList.remove('grid-cols-1');
+        grid.classList.add('grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3');
+      }
+    }
+
+    // Ordenar productos
+    function sortProducts(value) {
+      let sortedProducts = [...products];
+      
+      switch(value) {
+        case 'price-low':
+          sortedProducts.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-high':
+          sortedProducts.sort((a, b) => b.price - a.price);
+          break;
+        case 'name':
+          sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case 'newest':
+          sortedProducts.sort((a, b) => b.id - a.id);
+          break;
+      }
+      
+      renderProducts(sortedProducts);
+    }
+
+    // Quick view
+    function openQuickView(productId) {
+      document.getElementById('quickViewModal').style.display = 'flex';
+    }
+
+    function closeQuickView() {
+      document.getElementById('quickViewModal').style.display = 'none';
+    }
+
+    // Comparar productos
+    function toggleCompare(checkbox) {
+      console.log('Comparar producto:', checkbox.checked);
+    }
+
+    // Búsqueda en tiempo real
+    document.addEventListener('input', function(e) {
+      if (e.target.id === 'searchInput' || e.target.id === 'searchInputMobile') {
+        filterProducts();
+      }
+    });
+
+    // Event listeners para filtros
+    document.addEventListener('change', function(e) {
+      if (e.target.type === 'checkbox' || e.target.type === 'range') {
+        filterProducts();
+      }
+    });
+
+    // Cerrar modal al hacer clic fuera
+    window.addEventListener('click', function(e) {
+      const modal = document.getElementById('quickViewModal');
+      const filters = document.getElementById('mobileFilters');
+      const overlay = document.getElementById('filterOverlay');
+      
+      if (e.target === modal) {
+        closeQuickView();
+      }
+      
+      if (e.target === overlay) {
+        toggleMobileFilters();
+      }
+    });
+
+
+    // Cerrar filtros con Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const filters = document.getElementById('mobileFilters');
+        if (filters.classList.contains('active')) {
+          toggleMobileFilters();
+        }
+        closeQuickView();
+      }
+
+      
+    });
+  </script>
+</body>
+</html>
