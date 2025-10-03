@@ -1,1 +1,1203 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="DS3 Comunicaciones - Líder en soluciones de redes Cisco. Switch Catalyst, Access Points, equipos de última generación." />
+  <meta name="keywords"
+    content="Cisco, Switch Catalyst, redes, networking, WiFi, infraestructura, comunicación" />
+  <meta name="author" content="ds3comunicaciones" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Personalizado -->
+  <style>
+    :root {
+      --primary-blue: #049FD9;
+      --cisco-blue: #005073;
+      --dark-blue: #003B5C;
+      --tech-gradient: linear-gradient(135deg, #049FD9 0%, #005073 100%);
+      --card-gradient: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      overflow-x: hidden;
+    }
+
+    .tech-gradient {
+      background: var(--tech-gradient);
+    }
+
+    .card-gradient {
+      background: var(--card-gradient);
+    }
+
+    .hero-slider {
+      position: relative;
+      height: 70vh;
+      min-height: 500px;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide-overlay {
+      background: rgba(0, 80, 115, 0.85);
+    }
+
+    .tech-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border: 1px solid #e2e8f0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .tech-card:hover::before {
+      left: 100%;
+    }
+
+    .tech-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .category-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border: 1px solid #f1f5f9;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+      text-decoration: none;
+    }
+
+    .category-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--tech-gradient);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .category-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border: 1px solid #f1f5f9;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--tech-gradient);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .nav-tech {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-tech {
+      background: var(--tech-gradient);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-tech::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-tech:hover::before {
+      left: 100%;
+    }
+
+    .btn-tech:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(4, 159, 217, 0.3);
+    }
+
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    .shape {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .scrollbar-hide {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--tech-gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .footer-gradient {
+      background: linear-gradient(135deg, #003B5C 0%, #001F2D 100%);
+    }
+
+    .footer-links a {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #049FD9;
+      transition: width 0.3s ease;
+    }
+
+    .footer-links a:hover::before {
+      width: 100%;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #049FD9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      background: #049FD9;
+      transform: translateY(-3px);
+    }
+
+    /* WhatsApp Flotante */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+
+    .whatsapp-float i {
+      color: white;
+      font-size: 28px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Menú Móvil */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background: white;
+      z-index: 1001;
+      transition: left 0.3s ease;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+
+    .mobile-menu.active {
+      left: 0;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-slider {
+        height: 60vh;
+        min-height: 400px;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem !important;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .feature-section {
+        padding: 2rem 1rem;
+      }
+
+      .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .whatsapp-float i {
+        font-size: 24px;
+      }
+    }
+
+    /* Efectos de partículas para el footer */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(4, 159, 217, 0.3);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+    }
+  </style>
+
+  <title>DS3 Comunicaciones - Soluciones Cisco de Última Generación</title>
+</head>
+
+<body class="bg-gray-50">
+  <!-- WhatsApp Flotante -->
+  <a href="https://wa.me/51994428965?text=Hola,%20me%20interesa%20información%20sobre%20sus%20productos%20Cisco" 
+     target="_blank" 
+     class="whatsapp-float"
+     aria-label="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Menú Móvil -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-8">
+        <img src="http://www.ds3comunicaciones.com/mikrotik/images/Logo1.jpg" 
+             alt="DS3 Comunicaciones" 
+             class="h-10 w-auto">
+        <button id="closeMenu" class="text-gray-600 text-2xl">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <nav class="space-y-4">
+        <a href="index2.html" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
+          <i class="fas fa-home mr-3"></i>Inicio
+        </a>
+        <a href="productos3.html" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
+          <i class="fas fa-box mr-3"></i>Productos
+        </a>
+        <a href="#" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
+          <i class="fas fa-network-wired mr-3"></i>Soluciones
+        </a>
+        <a href="#" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
+          <i class="fas fa-headset mr-3"></i>Soporte
+        </a>
+        <a href="#" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition">
+          <i class="fas fa-envelope mr-3"></i>Contacto
+        </a>
+      </nav>
+
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <div class="space-y-3">
+          <a href="tel:+51994428965" class="flex items-center text-gray-600 hover:text-green-600">
+            <i class="fas fa-phone-alt mr-3"></i>
+            <span>+51 994 428 965</span>
+          </a>
+          <a href="mailto:netperu100@hotmail.com" class="flex items-center text-gray-600 hover:text-blue-600">
+            <i class="fas fa-envelope mr-3"></i>
+            <span>netperu100@hotmail.com</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay del Menú Móvil -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <!-- HEADER MODERNO -->
+  <header class="nav-tech sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between py-4">
+        <!-- Logo -->
+        <div class="flex items-center space-x-4">
+          <img src="http://www.ds3comunicaciones.com/mikrotik/images/Logo1.jpg" 
+               alt="DS3 Comunicaciones" 
+               class="h-12 w-auto">
+          <span class="text-xl font-bold text-gray-800 hidden md:block">DS3 Comunicaciones</span>
+        </div>
+
+        <!-- Navegación Principal (visible solo en desktop) -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="index2.html" class="text-gray-700 hover:text-blue-600 font-medium transition">Inicio</a>
+          <a href="productos3.html" class="text-gray-700 hover:text-blue-600 font-medium transition">Productos</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600 font-medium transition">Soluciones</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600 font-medium transition">Soporte</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600 font-medium transition">Contacto</a>
+        </nav>
+
+        <!-- Botones de acción -->
+        <div class="flex items-center space-x-4">
+          <!-- WhatsApp solo visible en desktop -->
+          <a href="https://wa.me/51994428965" 
+             target="_blank"
+             class="hidden md:flex items-center bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+            <i class="fab fa-whatsapp mr-2"></i>
+            <span>WhatsApp</span>
+          </a>
+          
+          <!-- Botón menú hamburguesa (solo móvil) -->
+          <button id="openMenu" class="md:hidden text-gray-700 text-xl">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SLIDER TECNOLÓGICO -->
+  <section class="hero-slider relative">
+    <!-- Shapes flotantes -->
+    <div class="floating-shapes">
+      <div class="shape w-20 h-20 top-10 left-10 floating" style="animation-delay: 0s;"></div>
+      <div class="shape w-12 h-12 top-40 right-20 floating" style="animation-delay: 2s;"></div>
+      <div class="shape w-16 h-16 bottom-20 left-20 floating" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Slide 1 - Switch Catalyst -->
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
+      <div class="slide-overlay absolute inset-0 flex items-center">
+        <div class="container mx-auto px-4">
+          <div class="hero-content text-white max-w-2xl">
+            <span class="bg-blue-500 text-sm px-3 py-1 rounded-full font-medium mb-4 inline-block">Nuevo Lanzamiento</span>
+            <h1 class="text-5xl font-bold mb-4 leading-tight">
+              Switch Cisco Catalyst 9200L
+            </h1>
+            <p class="text-xl mb-8 opacity-90">
+              Potencia empresarial con capacidad L3 completa. 24 puertos Gigabit + 4 puertos SFP. Ideal para redes de alto rendimiento.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button class="btn-tech">
+                <i class="fas fa-shopping-cart mr-2"></i>
+                Comprar Ahora
+              </button>
+              <button class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">
+                Ver Especificaciones
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 - Access Points -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1562408590-e32931084e23?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
+      <div class="slide-overlay absolute inset-0 flex items-center">
+        <div class="container mx-auto px-4">
+          <div class="hero-content text-white max-w-2xl">
+            <span class="bg-green-500 text-sm px-3 py-1 rounded-full font-medium mb-4 inline-block">WiFi 6</span>
+            <h1 class="text-5xl font-bold mb-4 leading-tight">
+              Access Points Cisco Aironet
+            </h1>
+            <p class="text-xl mb-8 opacity-90">
+              Tecnología WiFi 6 para máxima velocidad y cobertura. Perfecto para entornos empresariales exigentes.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button class="btn-tech">
+                <i class="fas fa-wifi mr-2"></i>
+                Ver Soluciones
+              </button>
+              <button class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">
+                Catálogo Completo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 - Soluciones Empresariales -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
+      <div class="slide-overlay absolute inset-0 flex items-center">
+        <div class="container mx-auto px-4">
+          <div class="hero-content text-white max-w-2xl">
+            <span class="bg-purple-500 text-sm px-3 py-1 rounded-full font-medium mb-4 inline-block">Enterprise</span>
+            <h1 class="text-5xl font-bold mb-4 leading-tight">
+              Soluciones Completas de Red
+            </h1>
+            <p class="text-xl mb-8 opacity-90">
+              Infraestructura de red empresarial de última generación. Cisco Meraki, Switching, Routing y más.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button class="btn-tech">
+                <i class="fas fa-network-wired mr-2"></i>
+                Soluciones
+              </button>
+              <button class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">
+                Contactar Asesor
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles del Slider -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
+      <button class="slider-dot w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition active"></button>
+      <button class="slider-dot w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition"></button>
+      <button class="slider-dot w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition"></button>
+    </div>
+
+    <!-- Flechas de navegación -->
+    <button class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-2xl bg-black bg-opacity-30 p-3 rounded-full hover:bg-opacity-50 transition">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-2xl bg-black bg-opacity-30 p-3 rounded-full hover:bg-opacity-50 transition">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </section>
+
+  <!-- SECCIÓN DE MARCAS ASOCIADAS -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Marcas Asociadas</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <!-- Marca Cisco -->
+        <div class="tech-card p-6 flex items-center justify-center">
+          <img src="http://www.ds3comunicaciones.com/cisco/images/logo-cisco.gif" 
+               alt="Cisco" 
+               class="h-12 w-auto grayscale hover:grayscale-0 transition">
+        </div>
+        
+        <!-- Marca Ubiquiti -->
+        <div class="tech-card p-6 flex items-center justify-center">
+          <img src="http://www.ds3comunicaciones.com/belden/images/ubnt_logo-100x47.png" 
+               alt="Ubiquiti" 
+               class="h-10 w-auto grayscale hover:grayscale-0 transition">
+        </div>
+        
+        <!-- Marca MikroTik -->
+        <div class="tech-card p-6 flex items-center justify-center">
+          <img src="http://www.ds3comunicaciones.com/belden/images/mikrotik_logo-100x24.png" 
+               alt="MikroTik" 
+               class="h-8 w-auto grayscale hover:grayscale-0 transition">
+        </div>
+        
+        <!-- Marca D-Link -->
+        <div class="tech-card p-6 flex items-center justify-center">
+          <img src="http://www.ds3comunicaciones.com/belden/images/D-Link_Logo-100x26.jpg" 
+               alt="D-Link" 
+               class="h-10 w-auto grayscale hover:grayscale-0 transition">
+        </div>
+        
+        <!-- Marca TP-Link -->
+        <div class="tech-card p-6 flex items-center justify-center">
+          <img src="http://www.ds3comunicaciones.com/belden/images/tp-link_logo-100x13.jpg" 
+               alt="TP-Link" 
+               class="h-6 w-auto grayscale hover:grayscale-0 transition">
+        </div>
+        
+        <!-- Marca Panduit -->
+        <div class="tech-card p-6 flex items-center justify-center">
+          <img src="http://www.ds3comunicaciones.com/panduit/images/panduit_logo.jpg" 
+               alt="Panduit" 
+               class="h-10 w-auto grayscale hover:grayscale-0 transition">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE CATEGORÍAS CISCO -->
+  <section class="py-12 bg-gradient-to-br from-blue-50 to-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Categorías Cisco</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        
+        <!-- Switch Catalyst -->
+        <a href="https://www.ds3comunicaciones.com/cisco/catalys_9200l.html" class="category-card">
+          <div class="p-6 flex flex-col items-center text-center">
+            <div class="w-16 h-16 mb-4 flex items-center justify-center">
+              <img src="./icons/Switch Catalyst.ico" 
+                   alt="Switch Catalyst" 
+                   class="max-w-full max-h-full object-contain">
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Switch Catalyst</h3>
+            <p class="text-sm text-gray-600">Switches empresariales de alto rendimiento</p>
+          </div>
+        </a>
+
+        <!-- Cisco Business -->
+        <a href="https://www.ds3comunicaciones.com/cisco/bussines_sg350.html" class="category-card">
+          <div class="p-6 flex flex-col items-center text-center">
+            <div class="w-16 h-16 mb-4 flex items-center justify-center">
+              <img src="./icons/Cisco Business.ico" 
+                   alt="Cisco Business" 
+                   class="max-w-full max-h-full object-contain">
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Cisco Business</h3>
+            <p class="text-sm text-gray-600">Soluciones para pequeñas empresas</p>
+          </div>
+        </a>
+
+        <!-- Switch Industrial -->
+        <a href="https://www.ds3comunicaciones.com/cisco/precios_cisco_switch_industrial_b.html" class="category-card">
+          <div class="p-6 flex flex-col items-center text-center">
+            <div class="w-16 h-16 mb-4 flex items-center justify-center">
+              <img src="./icons/Switch Industrial.ico" 
+                   alt="Switch Industrial" 
+                   class="max-w-full max-h-full object-contain">
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Switch Industrial</h3>
+            <p class="text-sm text-gray-600">Equipos para entornos industriales</p>
+          </div>
+        </a>
+
+        <!-- Aironet -->
+        <a href="https://www.ds3comunicaciones.com/cisco/precios_cisco_access_point_b.html" class="category-card">
+          <div class="p-6 flex flex-col items-center text-center">
+            <div class="w-16 h-16 mb-4 flex items-center justify-center">
+              <svg width="64" height="64" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M21 42C32.598 42 42 32.598 42 21C42 9.40202 32.598 0 21 0C9.40202 0 0 9.40202 0 21C0 32.598 9.40202 42 21 42Z"
+                  fill="white" stroke="#005073" stroke-width="2" />
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M27 21C27 24.3137 24.3137 27 21 27C17.6863 27 15 24.3137 15 21C15 17.6863 17.6863 15 21 15C24.3137 15 27 17.6863 27 21Z"
+                  fill="#005073" />
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M29 21C29 25.4183 25.4183 29 21 29C16.5817 29 13 25.4183 13 21C13 16.5817 16.5817 13 21 13C25.4183 13 29 16.5817 29 21Z"
+                  fill="white" stroke="#005073" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Aironet</h3>
+            <p class="text-sm text-gray-600">Access Points y soluciones WiFi</p>
+          </div>
+        </a>
+
+        <!-- Teléfono -->
+        <a href="https://www.ds3comunicaciones.com/cisco/precios_cisco_telefonos_b.html" class="category-card">
+          <div class="p-6 flex flex-col items-center text-center">
+            <div class="w-16 h-16 mb-4 flex items-center justify-center">
+              <img src="./icons/Télefono.ico" 
+                   alt="Teléfono" 
+                   class="max-w-full max-h-full object-contain">
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Teléfono</h3>
+            <p class="text-sm text-gray-600">Sistemas de telefonía IP</p>
+          </div>
+        </a>
+
+        <!-- Meraki -->
+        <a href="https://ds3comunicaciones.com/cisco/precios_cisco_meraki_b.html" class="category-card">
+          <div class="p-6 flex flex-col items-center text-center">
+            <div class="w-16 h-16 mb-4 flex items-center justify-center">
+              <img src="./icons/mariakii.ico" 
+                   alt="Meraki" 
+                   class="max-w-full max-h-full object-contain">
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Meraki</h3>
+            <p class="text-sm text-gray-600">Soluciones en la nube</p>
+          </div>
+        </a>
+
+        <!-- Transceiver -->
+        <a href="#" class="category-card">
+          <div class="p-6 flex flex-col items-center text-center">
+            <div class="w-16 h-16 mb-4 flex items-center justify-center">
+              <img src="./icons/Transceiver.ico" 
+                   alt="Transceiver" 
+                   class="max-w-full max-h-full object-contain">
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Transceiver</h3>
+            <p class="text-sm text-gray-600">Módulos y transceptores</p>
+          </div>
+        </a>
+
+        <!-- Todas las Categorías -->
+        <a href="https://www.ds3comunicaciones.com/cisco/index.html" class="category-card">
+          <div class="p-6 flex flex-col items-center text-center">
+            <div class="w-16 h-16 mb-4 flex items-center justify-center bg-blue-100 rounded-full">
+              <i class="fas fa-th-large text-2xl text-blue-600"></i>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">Ver Todas</h3>
+            <p class="text-sm text-gray-600">Explora todas las categorías Cisco</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE PRODUCTOS DESTACADOS -->
+  <section class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <span class="text-blue-600 font-semibold text-lg">PRODUCTOS DESTACADOS</span>
+        <h2 class="text-4xl font-bold text-gray-800 mt-2">Soluciones Cisco de Última Generación</h2>
+        <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
+          Equipos de networking empresarial con tecnología de punta para optimizar tu infraestructura de red.
+        </p>
+      </div>
+
+      <!-- Grid de Productos Moderno -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 product-grid">
+        
+        <!-- Producto 1 - Switch Catalyst -->
+        <div class="product-card group">
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <span class="bg-blue-100 text-blue-600 text-xs font-medium px-3 py-1 rounded-full">NUEVO</span>
+              <span class="text-2xl font-bold text-blue-600">$1,195</span>
+            </div>
+            
+            <div class="h-48 flex items-center justify-center mb-4">
+              <img src="https://web.netperu100.com/cisco/catalyst/images/C9200L-24P-4G-E_front.jpg" 
+              
+                   alt="Switch Catalyst 9200L" 
+                   class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300">
+            </div>
+            
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Switch Catalyst 9200L</h3>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+              C9200L-24T-4G-E - 24 puertos Gigabit + 4 puertos SFP, capacidad L3 completa.
+            </p>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <i class="fas fa-ethernet"></i>
+                <span>28 Puertos</span>
+              </div>
+              <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <i class="fas fa-layer-group"></i>
+                <span>Capa L3</span>
+              </div>
+            </div>
+            
+            <button class="btn-tech w-full mt-6">
+              <i class="fas fa-shopping-cart mr-2"></i>
+              Comprar Ahora
+            </button>
+          </div>
+        </div>
+
+        <!-- Producto 2 - Access Point -->
+        <div class="product-card group">
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <span class="bg-green-100 text-green-600 text-xs font-medium px-3 py-1 rounded-full">WIFI 6</span>
+              <span class="text-2xl font-bold text-blue-600">$899</span>
+            </div>
+            
+            <div class="h-48 flex items-center justify-center mb-4">
+              <img src="https://web.netperu100.com/cisco/catalyst/images/C9200L-24T-4G-E_front.jpg"
+                   alt="Access Point Aironet" 
+                   class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300">
+            </div>
+            
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Access Point Aironet</h3>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+              Tecnología WiFi 6 para máxima velocidad y cobertura en entornos empresariales.
+            </p>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <i class="fas fa-wifi"></i>
+                <span>WiFi 6</span>
+              </div>
+              <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <i class="fas fa-users"></i>
+                <span>300+ Users</span>
+              </div>
+            </div>
+            
+            <button class="btn-tech w-full mt-6">
+              <i class="fas fa-eye mr-2"></i>
+              Ver Detalles
+            </button>
+          </div>
+        </div>
+
+        <!-- Producto 3 - Router Industrial -->
+        <div class="product-card group">
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <span class="bg-orange-100 text-orange-600 text-xs font-medium px-3 py-1 rounded-full">INDUSTRIAL</span>
+              <span class="text-2xl font-bold text-blue-600">$1,450</span>
+            </div>
+            
+            <div class="h-48 flex items-center justify-center mb-4">
+              <img src="https://web.netperu100.com/cisco/catalyst/images/C9200L-48T-4G-E_front.jpg" 
+                   alt="Router Industrial" 
+                   class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300">
+            </div>
+            
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Router Industrial</h3>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+              Diseñado para entornos exigentes con protección contra condiciones ambientales adversas.
+            </p>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <i class="fas fa-shield-alt"></i>
+                <span>Rugged</span>
+              </div>
+              <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <i class="fas fa-bolt"></i>
+                <span>PoE++</span>
+              </div>
+            </div>
+            
+            <button class="btn-tech w-full mt-6">
+              <i class="fas fa-file-alt mr-2"></i>
+              Especificaciones
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón Ver Todos -->
+      <div class="text-center mt-12">
+        <button class="bg-transparent border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-600 hover:text-white transition">
+          <i class="fas fa-th-large mr-2"></i>
+          Ver Todos los Productos
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER TECNOLÓGICO MEJORADO -->
+  <footer class="footer-gradient text-white relative overflow-hidden">
+    <!-- Partículas de fondo -->
+    <div class="particles">
+      <div class="particle w-2 h-2 top-10 left-10" style="animation-delay: 0s;"></div>
+      <div class="particle w-1 h-1 top-40 right-20" style="animation-delay: 2s;"></div>
+      <div class="particle w-3 h-3 bottom-20 left-20" style="animation-delay: 4s;"></div>
+      <div class="particle w-2 h-2 top-60 right-40" style="animation-delay: 6s;"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-12 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <!-- Columna 1: Logo y Contacto -->
+        <div class="space-y-6">
+          <div class="flex items-center space-x-3">
+            <img src="http://www.ds3comunicaciones.com/mikrotik/images/Logo1.jpg" 
+                 alt="DS3 Comunicaciones" 
+                 class="h-12 w-auto">
+            <span class="text-xl font-bold">DS3 Comunicaciones</span>
+          </div>
+          
+          <p class="text-blue-200 leading-relaxed">
+            Líder en soluciones de networking y comunicaciones. Distribuidor autorizado Cisco con más de 15 años de experiencia.
+          </p>
+          
+          <div class="space-y-3">
+            <div class="flex items-center space-x-3">
+              <div class="social-icon">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+              <div>
+                <p class="font-semibold">WhatsApp</p>
+                <p class="text-blue-200">+51 994 428 965</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+              <div class="social-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <p class="font-semibold">Email</p>
+                <p class="text-blue-200">netperu100@hotmail.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna 2: Soluciones -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold border-b-2 border-blue-500 pb-2 inline-block">Soluciones</h3>
+          <ul class="space-y-3 footer-links">
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Switching & Routing</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Wireless & Mobility</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Security & Firewalls</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Data Center</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Collaboration</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Cloud Solutions</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Soporte -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold border-b-2 border-blue-500 pb-2 inline-block">Soporte</h3>
+          <ul class="space-y-3 footer-links">
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Soporte Técnico</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Documentación</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Descargas</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Garantías</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Preguntas Frecuentes</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Contactar Soporte</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Contacto -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold border-b-2 border-blue-500 pb-2 inline-block">Contacto Rápido</h3>
+          
+          <div class="space-y-3">
+            <div>
+              <p class="font-semibold">Horario de Atención</p>
+              <p class="text-blue-200">Lun-Vie: 9:00 - 18:00</p>
+              <p class="text-blue-200">Sábados: 9:00 - 13:00</p>
+            </div>
+            
+            <div>
+              <p class="font-semibold">Teléfonos</p>
+              <p class="text-blue-200">+51 994 428 965</p>
+              <p class="text-blue-200">+51 996 533 223</p>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="space-y-3">
+            <button class="btn-tech w-full">
+              <i class="fas fa-headset mr-2"></i>
+              Soporte 24/7
+            </button>
+            <button class="bg-transparent border-2 border-white text-white w-full py-2 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">
+              <i class="fas fa-file-alt mr-2"></i>
+              Cotización
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea divisoria -->
+      <div class="border-t border-blue-700 mt-8 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <!-- Derechos de autor -->
+          <div class="text-blue-300 text-sm">
+            <p>&copy; 2024 DS3 Comunicaciones. Todos los derechos reservados.</p>
+          </div>
+
+          <!-- Enlaces legales -->
+          <div class="flex space-x-6 text-sm">
+            <a href="#" class="text-blue-300 hover:text-white transition">Términos de Servicio</a>
+            <a href="#" class="text-blue-300 hover:text-white transition">Política de Privacidad</a>
+            <a href="#" class="text-blue-300 hover:text-white transition">Aviso Legal</a>
+          </div>
+
+          <!-- Redes sociales -->
+          <div class="flex space-x-4">
+            <a href="#" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://wa.me/994428965" class="social-icon bg-green-500 border-green-500">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    class HeroSlider {
+      constructor() {
+        this.slides = document.querySelectorAll('.slide');
+        this.dots = document.querySelectorAll('.slider-dot');
+        this.currentSlide = 0;
+        this.interval = null;
+        
+        this.init();
+      }
+      
+      init() {
+        this.startAutoplay();
+        
+        this.dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            this.goToSlide(index);
+          });
+        });
+        
+        document.querySelector('.fa-chevron-left').parentElement.addEventListener('click', () => {
+          this.prevSlide();
+        });
+        
+        document.querySelector('.fa-chevron-right').parentElement.addEventListener('click', () => {
+          this.nextSlide();
+        });
+        
+        document.querySelector('.hero-slider').addEventListener('mouseenter', () => {
+          this.stopAutoplay();
+        });
+        
+        document.querySelector('.hero-slider').addEventListener('mouseleave', () => {
+          this.startAutoplay();
+        });
+      }
+      
+      goToSlide(index) {
+        this.slides[this.currentSlide].classList.remove('active');
+        this.dots[this.currentSlide].classList.remove('active');
+        
+        this.currentSlide = index;
+        
+        this.slides[this.currentSlide].classList.add('active');
+        this.dots[this.currentSlide].classList.add('active');
+      }
+      
+      nextSlide() {
+        let next = this.currentSlide + 1;
+        if (next >= this.slides.length) next = 0;
+        this.goToSlide(next);
+      }
+      
+      prevSlide() {
+        let prev = this.currentSlide - 1;
+        if (prev < 0) prev = this.slides.length - 1;
+        this.goToSlide(prev);
+      }
+      
+      startAutoplay() {
+        this.interval = setInterval(() => {
+          this.nextSlide();
+        }, 5000);
+      }
+      
+      stopAutoplay() {
+        if (this.interval) {
+          clearInterval(this.interval);
+        }
+      }
+    }
+
+    // Menú Móvil
+    class MobileMenu {
+      constructor() {
+        this.menu = document.getElementById('mobileMenu');
+        this.overlay = document.getElementById('menuOverlay');
+        this.openButton = document.getElementById('openMenu');
+        this.closeButton = document.getElementById('closeMenu');
+        
+        this.init();
+      }
+      
+      init() {
+        this.openButton.addEventListener('click', () => this.openMenu());
+        this.closeButton.addEventListener('click', () => this.closeMenu());
+        this.overlay.addEventListener('click', () => this.closeMenu());
+        
+        // Cerrar menú al hacer clic en enlaces
+        this.menu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => this.closeMenu());
+        });
+      }
+      
+      openMenu() {
+        this.menu.classList.add('active');
+        this.overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      closeMenu() {
+        this.menu.classList.remove('active');
+        this.overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Efectos de partículas
+    function createParticles() {
+      const particlesContainer = document.querySelector('.particles');
+      const particleCount = 15;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.width = `${Math.random() * 3 + 1}px`;
+        particle.style.height = particle.style.width;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 8}s`;
+        particle.style.animationDuration = `${Math.random() * 4 + 4}s`;
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Inicializar todo cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+      new HeroSlider();
+      new MobileMenu();
+      createParticles();
+    });
+  </script>
+</body>
+</html>
